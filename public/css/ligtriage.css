@@ -27,8 +27,8 @@ h1,h2,h3{margin:0;line-height:1.2}
 .topbar{background:var(--brand-grad);color:#fff;box-shadow:var(--shadow)}
 .topbar-in{max-width:1180px;margin:0 auto;padding:.7rem 1.2rem;display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:.8rem;color:#fff;text-decoration:none}
-.logo-chip{background:#fff;border-radius:12px;padding:4px;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.logo-chip img{width:44px;height:44px;display:block}
+.logo-chip{background:#ffffff00;border-radius:12px;padding:4px;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.logo-chip img{width:88px;height:44px;display:block}
 .wordmark b{display:block;font-size:1.35rem;letter-spacing:-.01em}
 .wordmark small{display:block;opacity:.85;font-size:.78rem}
 .topbar nav{display:flex;gap:.3rem;flex-wrap:wrap;flex:1}
@@ -136,7 +136,7 @@ textarea{min-height:80px;resize:vertical}
 
 .patient{max-width:30rem;margin:0 auto;padding:1rem 1rem 3rem}
 .p-head{display:flex;align-items:center;gap:.7rem;margin:.4rem 0 1rem}
-.p-head .logo-chip img{width:38px;height:38px}
+.p-head .logo-chip img{width:76px;height:38px}
 .p-head b{font-size:1.2rem}
 .p-head small{display:block;color:var(--muted);font-size:.78rem}
 .num-card{background:var(--brand-grad);color:#fff;border-radius:20px;text-align:center;padding:1.2rem 1rem 1.4rem;box-shadow:var(--shadow);margin-bottom:1rem}
