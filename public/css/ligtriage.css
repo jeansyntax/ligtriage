@@ -280,3 +280,11 @@ body{--hero-grad:linear-gradient(120deg,#283593 0%,#1565c0 100%);--text:#eef1ff;
   body{--text:#0c2a5c;--muted:#5b6f8f;background:#fff;background-image:none;color:#0c2a5c}
   .site-head,.subnav,.hero{display:none!important}
 }
+
+.brand2 img,.login-card .logo,.report-head img{width:auto;object-fit:contain}
+.brand2 img{height:50px;max-width:230px}
+.login-card .logo{height:72px;max-width:80%}
+.report-head img{height:56px;max-width:200px}
+.logo-chip{padding:6px 12px;border-radius:14px}
+.logo-chip img,.p-head .logo-chip img{width:auto;height:38px}
+.foot img{width:auto;height:20px}

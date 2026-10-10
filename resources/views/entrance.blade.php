@@ -10,7 +10,7 @@
 body{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);min-height:100vh;background:#fff}
 .intro{background:var(--hero-grad);color:#fff;padding:6vh 5vw;display:flex;flex-direction:column;justify-content:center;gap:3.2vh}
 .intro .brandrow{display:flex;align-items:center;gap:1rem}
-.intro .logo-chip img{width:clamp(56px,6vw,84px);height:clamp(56px,6vw,84px)}
+.intro .logo-chip img{width:auto;height:clamp(44px,5vw,68px)}
 .intro .brandrow b{font-size:clamp(1.4rem,2.4vw,2.2rem)}
 .intro .brandrow small{display:block;opacity:.9;font-size:clamp(.8rem,1.1vw,1rem)}
 .intro h1{font-size:clamp(2.2rem,4.8vw,4.2rem);line-height:1.05;letter-spacing:-.02em;font-weight:800}
