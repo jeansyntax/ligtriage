@@ -2,10 +2,11 @@
 @section('title', 'Queue')
 
 @section('content')
-<div class="page-head">
-  <h1>Today's queue</h1>
-  <span class="muted">{{ now()->format('l, F j, Y') }}. Updates by itself.</span>
-</div>
+<section class="hero">
+  <span class="pill">CHO Triage Queue · San Fernando City, La Union</span>
+  <h1>Today's <span>queue</span></h1>
+  <p>{{ now()->format('l, F j, Y') }}. This board updates by itself, so you do not need to refresh it.</p>
+</section>
 
 <div id="board">@include('staff.partials.queue')</div>
 @endsection

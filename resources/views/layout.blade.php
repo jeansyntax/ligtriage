@@ -3,34 +3,54 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>@yield('title', 'Queue') | LIGTriage</title>
 <link rel="icon" href="{{ asset('images/favicon.png') }}">
 <link rel="stylesheet" href="{{ asset('css/ligtriage.css') }}">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('lt-theme')||''}catch(e){}</script>
 </head>
 <body>
-<header class="topbar">
-  <div class="topbar-in">
-    <a class="brand" href="{{ route('staff.queue') }}">
-      <span class="logo-chip"><img src="{{ asset('images/ligtas-logo.png') }}" alt="LIGTAS logo"></span>
-      <span class="wordmark"><b>LIGTriage</b><small>Companion system of LIGTAS</small></span>
+<header class="site-head">
+  <div class="head-in">
+    <a class="brand2" href="{{ route('staff.queue') }}">
+      <img src="{{ asset('images/ligtas-logo.png') }}" alt="LIGTAS logo">
+      <span class="wm"><b>LIGTriage</b><small>Triage Queue · City Health Office, San Fernando City, La Union</small></span>
     </a>
-    <nav>
-      <a href="{{ route('staff.queue') }}" class="{{ request()->routeIs('staff.queue*') ? 'on' : '' }}">Queue</a>
-      <a href="{{ route('staff.create') }}" class="{{ request()->routeIs('staff.create') ? 'on' : '' }}">Add patient</a>
-      <a href="{{ route('staff.summary') }}" class="{{ request()->routeIs('staff.summary') ? 'on' : '' }}">Daily summary</a>
-      <a href="{{ route('entrance.show') }}" target="_blank" rel="noopener">Entrance screen</a>
-      @if(auth()->user()->role === 'admin')
-        <a href="{{ route('staff.users') }}" class="{{ request()->routeIs('staff.users*') ? 'on' : '' }}">Staff accounts</a>
-      @endif
-    </nav>
-    <div class="tools">
-      <button type="button" class="link-btn" id="themeBtn" aria-label="Switch light or dark mode">Dark mode</button>
-      <span>{{ auth()->user()->name }}</span>
-      <form method="POST" action="{{ route('logout') }}">@csrf<button class="link-btn">Log out</button></form>
-    </div>
+    <div class="online"><i></i>System Online · {{ now()->format('M d, Y') }}</div>
   </div>
+  <div class="gradline"></div>
 </header>
+
+<nav class="subnav">
+  <div class="sub-in">
+    <div class="links">
+      <a href="{{ route('staff.queue') }}" class="{{ request()->routeIs('staff.queue*') ? 'on' : '' }}">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Queue</a>
+      <a href="{{ route('staff.create') }}" class="{{ request()->routeIs('staff.create') ? 'on' : '' }}">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Add patient</a>
+      <a href="{{ route('staff.summary') }}" class="{{ request()->routeIs('staff.summary') ? 'on' : '' }}">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M8 17V9M13 17V5M18 17v-6"/></svg>Daily summary</a>
+      <a href="{{ route('entrance.show') }}" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Entrance screen</a>
+    </div>
+
+    <details class="menu">
+      <summary class="menu-btn">
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Menu
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+      <div class="menu-panel">
+        <span class="who">{{ auth()->user()->name }}</span>
+        @if(auth()->user()->role === 'admin')
+          <a href="{{ route('staff.users') }}">Staff accounts</a>
+        @endif
+        <button type="button" id="themeBtn">Dark mode</button>
+        <form method="POST" action="{{ route('logout') }}">@csrf<button>Log out</button></form>
+      </div>
+    </details>
+  </div>
+</nav>
 
 <main class="container">
   @if(session('ok'))<div class="alert alert-ok">{{ session('ok') }}</div>@endif
@@ -47,6 +67,10 @@
     document.documentElement.dataset.theme=next;
     try{localStorage.setItem('lt-theme',next)}catch(e){}
     label();
+  });
+  document.addEventListener('click',function(e){
+    var m=document.querySelector('.menu');
+    if(m&&!m.contains(e.target))m.removeAttribute('open');
   });
 })();
 </script>

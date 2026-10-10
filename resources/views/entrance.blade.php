@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{ asset('css/ligtriage.css') }}">
 <style>
 body{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);min-height:100vh;background:#fff}
-.intro{background:var(--brand-grad);color:#fff;padding:6vh 5vw;display:flex;flex-direction:column;justify-content:center;gap:3.2vh}
+.intro{background:var(--hero-grad);color:#fff;padding:6vh 5vw;display:flex;flex-direction:column;justify-content:center;gap:3.2vh}
 .intro .brandrow{display:flex;align-items:center;gap:1rem}
 .intro .logo-chip img{width:clamp(56px,6vw,84px);height:clamp(56px,6vw,84px)}
 .intro .brandrow b{font-size:clamp(1.4rem,2.4vw,2.2rem)}
@@ -19,7 +19,7 @@ ol{list-style:none;margin:0;padding:0;display:grid;gap:2vh;counter-reset:s}
 li{counter-increment:s;display:flex;gap:1.1rem;align-items:center;font-size:clamp(1.1rem,1.9vw,1.7rem)}
 li::before{content:counter(s);flex:none;width:2.1em;height:2.1em;border-radius:50%;background:var(--amber);color:#3a2a00;display:grid;place-items:center;font-weight:800}
 .note{opacity:.85;font-size:clamp(.9rem,1.2vw,1.1rem);margin:0}
-.scan{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5vh;padding:5vh 4vw;background:var(--bg)}
+.scan{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5vh;padding:5vh 4vw;background:#0c1352}
 .tile{position:relative;background:#fff;padding:clamp(14px,2vw,28px);border-radius:22px;width:min(100%,62vh,560px);box-shadow:0 0 0 7px var(--amber),var(--shadow)}
 #qr svg{display:block;width:100%;height:auto}
 .timer{width:min(100%,62vh,560px)}
