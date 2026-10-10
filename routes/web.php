@@ -8,6 +8,7 @@ use App\Http\Controllers\StaffTicketController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => auth()->check()
@@ -17,6 +18,19 @@ Route::get('/', fn () => auth()->check()
 Route::get('/login', [AuthController::class, 'show'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:10,1')->name('login.attempt');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+
+# one-time setup for hosts without a terminal. needs SETUP_KEY, remove it after use
+Route::get('/setup/{key}', function (string $key) {
+    $real = (string) config('triage.setup_key');
+    abort_if($real === '' || ! hash_equals($real, $key), 404);
+
+    Artisan::call('migrate', ['--force' => true]);
+    $log = Artisan::output();
+    Artisan::call('db:seed', ['--force' => true]);
+    $log .= Artisan::output();
+
+    return response('<pre>'.e($log).'</pre><p>Done. Now delete SETUP_KEY in your host settings.</p>');
+});
 
 # patient side, no login
 Route::get('/scan/{token}', [ScanController::class, 'scan'])->middleware('throttle:60,1')->name('scan');

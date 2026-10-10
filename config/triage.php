@@ -1,6 +1,12 @@
 <?php
 
 return [
+    # one-time setup link for hosts without a terminal. leave empty to switch it off
+    'setup_key' => env('SETUP_KEY', ''),
+
+    # password given to the seeded staff accounts
+    'seed_password' => env('SEED_PASSWORD', 'password'),
+
     # waiting tickets from the QR flow are cancelled after this many hours
     'expire_hours' => 4,
 

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             $user->forceFill([
                 'name' => $a['name'],
                 'role' => $a['role'],
-                'password' => Hash::make('password'),
+                'password' => Hash::make(config('triage.seed_password')),
             ])->save();
         }
     }
