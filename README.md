@@ -106,3 +106,9 @@ Questions and options live in `config/triage.php`.
 - Nothing is sent to LIGTAS. The button is only a link, and LIGTriage keeps its own database.
 - The link can be changed with `LIGTAS_REGISTER_URL` in `.env` (or in the host's environment variables).
 - This update has a new migration: run `php artisan migrate`.
+
+## 11. Roles
+
+- **CHO triage staff:** queue board, patient pages, call and status buttons, add patient, daily summary, entrance screen.
+- **Admin:** daily summary, entrance screen and CHO staff accounts only. The admin cannot open the queue or any patient page.
+- Admin can only create CHO staff accounts (no more admin accounts), and must type the admin password to create or remove one. Admin accounts cannot be removed from the page.

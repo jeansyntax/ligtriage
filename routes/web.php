@@ -8,11 +8,12 @@ use App\Http\Controllers\StaffTicketController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\ChoOnly;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => auth()->check()
-    ? redirect()->route('staff.queue')
+    ? redirect()->route(auth()->user()->role === 'admin' ? 'staff.summary' : 'staff.queue')
     : redirect()->route('login'));
 
 Route::get('/login', [AuthController::class, 'show'])->name('login');
@@ -45,20 +46,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/entrance/current', [EntranceController::class, 'current'])->name('entrance.current');
 
     Route::prefix('staff')->name('staff.')->group(function () {
-        Route::get('/queue', [StaffQueueController::class, 'index'])->name('queue');
-        Route::get('/queue/partial', [StaffQueueController::class, 'partial'])->name('queue.partial');
-        Route::post('/queue/call-next', [StaffQueueController::class, 'callNext'])->name('queue.next');
-
-        Route::get('/tickets/create', [StaffTicketController::class, 'create'])->name('create');
-        Route::post('/tickets', [StaffTicketController::class, 'store'])->name('store');
-        Route::get('/tickets/{ticket}', [StaffTicketController::class, 'show'])->name('ticket');
-        Route::post('/tickets/{ticket}/priority', [StaffTicketController::class, 'priority'])->name('ticket.priority');
-        Route::post('/tickets/{ticket}/status', [StaffTicketController::class, 'status'])->name('ticket.status');
-
         Route::get('/summary', [SummaryController::class, 'index'])->name('summary');
 
+        # CHO triage staff only
+        Route::middleware(ChoOnly::class)->group(function () {
+            Route::get('/queue', [StaffQueueController::class, 'index'])->name('queue');
+            Route::get('/queue/partial', [StaffQueueController::class, 'partial'])->name('queue.partial');
+            Route::post('/queue/call-next', [StaffQueueController::class, 'callNext'])->name('queue.next');
+
+            Route::get('/tickets/create', [StaffTicketController::class, 'create'])->name('create');
+            Route::post('/tickets', [StaffTicketController::class, 'store'])->name('store');
+            Route::get('/tickets/{ticket}', [StaffTicketController::class, 'show'])->name('ticket');
+            Route::post('/tickets/{ticket}/priority', [StaffTicketController::class, 'priority'])->name('ticket.priority');
+            Route::post('/tickets/{ticket}/status', [StaffTicketController::class, 'status'])->name('ticket.status');
+        });
+
+        # admin only
         Route::get('/users', [UserController::class, 'index'])->name('users');
-        Route::post('/users', [UserController::class, 'store'])->name('users.store');
-        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::post('/users', [UserController::class, 'store'])->middleware('throttle:10,1')->name('users.store');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('throttle:10,1')->name('users.destroy');
     });
 });

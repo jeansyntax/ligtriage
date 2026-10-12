@@ -10,7 +10,7 @@ class AuthController extends Controller
     public function show()
     {
         if (Auth::check()) {
-            return redirect()->route('staff.queue');
+            return redirect()->route($this->home());
         }
 
         return view('auth.login');
@@ -26,10 +26,15 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('staff.queue'));
+            return redirect()->intended(route($this->home()));
         }
 
         return back()->withErrors(['email' => 'Email or password is incorrect.'])->onlyInput('email');
+    }
+
+    private function home(): string
+    {
+        return Auth::user()->role === 'admin' ? 'staff.summary' : 'staff.queue';
     }
 
     public function logout(Request $request)
