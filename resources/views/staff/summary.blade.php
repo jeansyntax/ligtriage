@@ -36,6 +36,7 @@
       @foreach(\App\Models\QueueTicket::PRIORITIES as $key => $label)
         <tr><td><span class="badge p-{{ $key }}">{{ $label }}</span></td><td><b>{{ $byPriority->get($key, 0) }}</b></td></tr>
       @endforeach
+      <tr><td><span class="badge fast">Fast lane</span></td><td><b>{{ $fastLaneCount }}</b></td></tr>
     </table>
   </div>
 
@@ -88,7 +89,7 @@
 <h2 class="h2">Ticket log</h2>
 <div class="table-wrap">
   <table>
-    <thead><tr><th>No.</th><th>Arrived</th><th>Priority</th><th>Confirmed by staff</th><th>Wait</th><th>Outcome</th></tr></thead>
+    <thead><tr><th>No.</th><th>Arrived</th><th>Priority</th><th>Confirmed by staff</th><th>Fast lane</th><th>Wait</th><th>Outcome</th></tr></thead>
     <tbody>
     @forelse($tickets as $t)
       <tr>
@@ -96,11 +97,12 @@
         <td>{{ $t->created_at->format('g:i A') }}</td>
         <td>{{ $t->priority_label }}</td>
         <td>{{ $t->is_confirmed ? 'Yes' : 'No' }}</td>
+        <td>{{ $t->fast_lane ? 'Yes' : '-' }}</td>
         <td>{{ $t->waitMinutes() !== null ? $t->waitMinutes().' min' : '-' }}</td>
         <td>{{ ucfirst(str_replace('_', ' ', $t->status)) }}</td>
       </tr>
     @empty
-      <tr><td colspan="6" class="muted">No tickets on this day.</td></tr>
+      <tr><td colspan="7" class="muted">No tickets on this day.</td></tr>
     @endforelse
     </tbody>
   </table>

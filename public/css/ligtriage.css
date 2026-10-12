@@ -27,8 +27,8 @@ h1,h2,h3{margin:0;line-height:1.2}
 .topbar{background:var(--brand-grad);color:#fff;box-shadow:var(--shadow)}
 .topbar-in{max-width:1180px;margin:0 auto;padding:.7rem 1.2rem;display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:.8rem;color:#fff;text-decoration:none}
-.logo-chip{background:#ffffff00;border-radius:12px;padding:4px;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.logo-chip img{width:88px;height:44px;display:block}
+.logo-chip{background:#fff;border-radius:12px;padding:4px;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.logo-chip img{width:44px;height:44px;display:block}
 .wordmark b{display:block;font-size:1.35rem;letter-spacing:-.01em}
 .wordmark small{display:block;opacity:.85;font-size:.78rem}
 .topbar nav{display:flex;gap:.3rem;flex-wrap:wrap;flex:1}
@@ -136,7 +136,7 @@ textarea{min-height:80px;resize:vertical}
 
 .patient{max-width:30rem;margin:0 auto;padding:1rem 1rem 3rem}
 .p-head{display:flex;align-items:center;gap:.7rem;margin:.4rem 0 1rem}
-.p-head .logo-chip img{width:76px;height:38px}
+.p-head .logo-chip img{width:38px;height:38px}
 .p-head b{font-size:1.2rem}
 .p-head small{display:block;color:var(--muted);font-size:.78rem}
 .num-card{background:var(--brand-grad);color:#fff;border-radius:20px;text-align:center;padding:1.2rem 1rem 1.4rem;box-shadow:var(--shadow);margin-bottom:1rem}
@@ -288,3 +288,12 @@ body{--hero-grad:linear-gradient(120deg,#283593 0%,#1565c0 100%);--text:#eef1ff;
 .logo-chip{padding:6px 12px;border-radius:14px}
 .logo-chip img,.p-head .logo-chip img{width:auto;height:38px}
 .foot img{width:auto;height:20px}
+
+.badge.fast{background:#fff3d1;color:#8a5a00;box-shadow:inset 0 0 0 1.5px #fbc02d;margin-left:.3rem}
+[data-theme="dark"] .badge.fast{background:#4a3a10;color:#ffd166}
+.fast-box{margin-top:.9rem;padding:1rem;border-radius:14px;background:var(--urgent-bg);border:2px solid #fbc02d}
+.fast-box b{display:block;font-size:1.05rem}
+.fast-box p{margin:.2rem 0 .8rem}
+.radios input:checked+span.fl-no{border-color:var(--blue-500);background:rgba(47,95,224,.1)}
+.radios input:checked+span.fl-yes{border-color:#fbc02d;background:var(--urgent-bg);color:var(--amber-dark)}
+[data-theme="dark"] .radios input:checked+span.fl-yes{color:#ffd166}

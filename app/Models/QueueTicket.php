@@ -21,6 +21,7 @@ class QueueTicket extends Model
     protected $casts = [
         'queue_date' => 'date',
         'answers' => 'array',
+        'fast_lane' => 'boolean',
         'called_at' => 'datetime',
         'finished_at' => 'datetime',
     ];

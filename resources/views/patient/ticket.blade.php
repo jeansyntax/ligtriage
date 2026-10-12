@@ -140,6 +140,11 @@ function render(d) {
     h += '<div class="alert alert-danger" style="margin:.8rem 0 0">Please tell the triage staff right now. Do not wait for your number.</div>';
   }
 
+  if (d.fast_lane && (d.status === 'waiting' || d.status === 'called')) {
+    h += '<div class="fast-box"><b>Fast lane</b><p>The triage staff marked you for the fast lane. Please register in LIGTAS now.</p>'
+      + '<a class="btn btn-amber btn-wide" href="' + d.register_url + '" target="_blank" rel="noopener">Register in LIGTAS</a></div>';
+  }
+
   panel.innerHTML = h;
 
   if (formBox && d.status !== 'waiting') formBox.hidden = true;

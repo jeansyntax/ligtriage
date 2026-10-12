@@ -35,6 +35,9 @@
       @endforeach
     </div>
   </div>
+  <div class="field">
+    <label class="check"><input type="checkbox" name="fast_lane" value="1" @checked(old('fast_lane'))> Fast lane (suspected notifiable disease)</label>
+  </div>
   <button class="btn btn-primary">Add to queue</button>
 </form>
 @endsection

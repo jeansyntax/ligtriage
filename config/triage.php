@@ -10,6 +10,9 @@ return [
     # waiting tickets from the QR flow are cancelled after this many hours
     'expire_hours' => 4,
 
+    # where fast lane patients register in LIGTAS
+    'ligtas_register_url' => env('LIGTAS_REGISTER_URL', 'https://app.ligtas.site/register'),
+
     # used for wait estimates until enough patients are done today
     'default_handling_minutes' => 8,
 

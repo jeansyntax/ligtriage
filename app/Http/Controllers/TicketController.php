@@ -111,6 +111,8 @@ class TicketController extends Controller
             'confirmed' => $ticket->is_confirmed,
             'ahead' => $ahead,
             'wait_minutes' => $wait,
+            'fast_lane' => $ticket->is_confirmed && $ticket->fast_lane,
+            'register_url' => config('triage.ligtas_register_url'),
         ];
     }
 }

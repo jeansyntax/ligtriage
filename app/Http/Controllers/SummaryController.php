@@ -35,6 +35,7 @@ class SummaryController extends Controller
             'byStatus' => $tickets->countBy('status'),
             'byPriority' => $tickets->countBy(fn ($t) => $t->effective_priority),
             'bySource' => $tickets->countBy('source'),
+            'fastLaneCount' => $tickets->where('fast_lane', true)->count(),
             'avgWait' => $waits->isNotEmpty() ? (int) round($waits->avg()) : null,
             'maxWait' => $waits->isNotEmpty() ? $waits->max() : null,
             'avgHandling' => $handling->isNotEmpty() ? (int) round($handling->avg()) : null,

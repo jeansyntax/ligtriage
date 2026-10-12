@@ -22,6 +22,7 @@ class StaffTicketController extends Controller
         $data = $request->validate([
             'priority' => 'required|in:emergency,urgent,routine',
             'note' => 'nullable|string|max:255',
+            'fast_lane' => 'required|in:0,1',
         ]);
 
         $changed = $ticket->suggested_priority && $data['priority'] !== $ticket->suggested_priority;
@@ -35,6 +36,7 @@ class StaffTicketController extends Controller
         $ticket->update([
             'priority' => $data['priority'],
             'priority_note' => $data['note'] ?? null,
+            'fast_lane' => $data['fast_lane'] === '1',
         ]);
 
         return back()->with('ok', 'Priority confirmed.');
@@ -78,6 +80,7 @@ class StaffTicketController extends Controller
             'age_group' => 'required|in:'.implode(',', array_keys(config('triage.age_groups'))),
             'complaint' => 'nullable|string|max:255',
             'priority' => 'required|in:emergency,urgent,routine',
+            'fast_lane' => 'nullable|boolean',
         ]);
 
         $ticket = QueueTicket::createForToday([
@@ -90,6 +93,7 @@ class StaffTicketController extends Controller
                 'notes' => $data['complaint'] ?? null,
             ],
             'priority' => $data['priority'],
+            'fast_lane' => $request->boolean('fast_lane'),
         ]);
 
         return redirect()->route('staff.queue')->with('ok', "Added as number {$ticket->number}.");

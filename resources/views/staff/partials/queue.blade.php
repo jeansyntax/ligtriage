@@ -24,7 +24,7 @@
       <tr class="p-{{ $t->effective_priority }}">
         <td class="n">{{ $t->number }}</td>
         <td>{{ $t->patient_name ?: 'No name given' }}</td>
-        <td><span class="badge p-{{ $t->effective_priority }}">{{ $t->priority_label }}</span></td>
+        <td><span class="badge p-{{ $t->effective_priority }}">{{ $t->priority_label }}</span>@if($t->fast_lane)<span class="badge fast">Fast lane</span>@endif</td>
         <td>{{ $t->called_at->diffForHumans() }}</td>
         <td><div class="actions">
           <a class="btn btn-ghost btn-sm" href="{{ route('staff.ticket', $t) }}">View</a>
@@ -52,6 +52,7 @@
         <td>{{ $t->age_label }}</td>
         <td>
           <span class="badge p-{{ $t->effective_priority }}">{{ $t->priority_label }}</span>
+          @if($t->fast_lane)<span class="badge fast">Fast lane</span>@endif
           @if($t->answers === null)<span class="hint">form not filled</span>
           @elseif(! $t->is_confirmed)<span class="hint">to confirm</span>@endif
         </td>

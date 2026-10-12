@@ -97,3 +97,12 @@ Questions and options live in `config/triage.php`.
 - Patients need no account. Name is optional. The ticket link uses a long random token.
 - Patients tick a consent box before sending answers.
 - Only logged-in staff can see answers. Old unfinished tickets are cancelled automatically.
+
+## 10. Fast lane and LIGTAS link
+
+- When staff confirm priority on a patient's page, they also choose **Fast lane: No / Yes** (Yes is for a suspected notifiable disease). Only staff decide this.
+- After a Yes, the patient's phone shows a **Register in LIGTAS** button that opens https://app.ligtas.site/register in a new tab.
+- Staff see a Fast lane badge on the queue board. The daily summary counts fast lane patients.
+- Nothing is sent to LIGTAS. The button is only a link, and LIGTriage keeps its own database.
+- The link can be changed with `LIGTAS_REGISTER_URL` in `.env` (or in the host's environment variables).
+- This update has a new migration: run `php artisan migrate`.
